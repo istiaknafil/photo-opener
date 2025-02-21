@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Opener</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        
+        let imgUrl = getQueryParam('img') || 'images/schedule.png';
+        
+        if (!imgUrl.startsWith('https://') && !imgUrl.startsWith('images/')) {
+            document.body.innerHTML = "<h2>Only HTTPS or local images (images/ folder) are allowed.</h2>";
+        } else {
+            const imgElement = document.createElement('img');
+            imgElement.src = imgUrl;
+            imgElement.alt = "Requested Image";
+            document.body.appendChild(imgElement);
+        }
+    </script>
+</body>
+</html>
